@@ -34,6 +34,10 @@ dependencies {
 	testRuntimeOnly("org.junit.platform:junit-platform-launcher")
 }
 
+dependencyLocking {
+    lockAllConfigurations()
+}
+
 dependencyCheck {
 
     autoUpdate = false
