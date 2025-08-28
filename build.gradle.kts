@@ -4,6 +4,7 @@ plugins {
 	id("io.spring.dependency-management") version "1.1.7"
 	id("org.graalvm.buildtools.native") version "0.10.6"
 	id("org.owasp.dependencycheck") version "12.1.3"
+    id("org.sonarqube") version "6.3.1.5724"
 }
 
 group = "com.centricsoftware"
@@ -25,6 +26,7 @@ dependencies {
 	implementation("org.springframework.boot:spring-boot-starter-webflux")
 	implementation("org.springframework.boot:spring-boot-starter-data-jpa")
 	implementation("com.h2database:h2")
+    implementation("jakarta.inject:jakarta.inject-api")
 
 
 
@@ -65,6 +67,14 @@ dependencyCheck {
             autoconfEnabled = false
         }
 
+}
+
+sonarqube {
+    properties {
+        property("sonar.projectKey", "vulnerable-project-poc-semgrep")
+        property("sonar.host.url", "http://localhost:9001")
+        property("sonar.login", "sqp_01bbafb34ec36c5466335e8a52cdb9681d63fffa")
+    }
 }
 
 tasks.withType<Test> {

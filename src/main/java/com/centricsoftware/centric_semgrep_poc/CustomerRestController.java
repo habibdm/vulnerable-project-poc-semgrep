@@ -16,7 +16,7 @@ import jakarta.inject.Inject;
 public class CustomerRestController {
 
     @Inject
-    private CustomerRepository customerRepository;
+    private CustomerService customerService;
 
     @GetMapping
     public String greet(@RequestParam(value = "name", required = false, defaultValue = "John Doe") String name) {
@@ -25,12 +25,12 @@ public class CustomerRestController {
 
     @GetMapping("/search")
     public List<Customer> findAllCustomersByLastName(@RequestParam(value = "lastName") String lastName) {
-	return customerRepository.findByLastName(lastName);
+	return customerService.findByLastName(lastName);
     }
-    
+
     @PostMapping
     public Customer addANewCustomer(@RequestBody Customer customer) {
-	return customerRepository.saveAndFlush(customer);
+	return customerService.save(customer);
     }
 
 }
